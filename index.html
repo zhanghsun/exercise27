@@ -1,106 +1,123 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Layout Practice</title>
-    <style>
-        /* 背景與基本設定 */
-        body {
-            background-color: #5bb2fb; /* 圖片中的藍色背景 */
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Layout</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        /* 白色卡片容器 */
-        .container {
-            background-color: white;
-            width: 100%;
-            max-width: 600px;
-            padding: 20px;
-            border-radius: 12px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+    body {
+      margin: 0;
+      padding: 24px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #eeeeee;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-        /* 頂部綠色區塊 */
-        .header {
-            background-color: #b3d944;
-            height: 140px;
-            border-radius: 6px;
-        }
+    .outer {
+      width: min(820px, 100%);
+      background: #58acec;
+      padding: 18px;
+    }
 
-        /* 中間藍綠色區塊容器 */
-        .content-row {
-            display: flex;
-            gap: 10px;
-            /* 電腦版 (b): 預設為橫向排列 */
-            flex-direction: row; 
-        }
+    .panel {
+      width: min(360px, 100%);
+      margin: 0 auto;
+      background: #f8f8f8;
+      border-radius: 12px;
+      padding: 12px;
+    }
 
-        .content-box {
-            background-color: #00bcd4;
-            height: 120px;
-            flex: 1; /* 平分剩餘空間 */
-            border-radius: 4px;
-        }
+    .layout {
+      display: grid;
+      gap: 6px;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-areas:
+        "header header"
+        "main1 main1"
+        "main2 main2"
+        "main3 main3"
+        "foot1 foot2"
+        "foot3 foot4";
+    }
 
-        /* 底部灰色小區塊容器 */
-        .footer-grid {
-            display: grid;
-            gap: 10px;
-            /* 電腦版 (b): 預設為 4 欄 */
-            grid-template-columns: repeat(4, 1fr);
-        }
+    .box {
+      width: 100%;
+      border-radius: 2px;
+    }
 
-        .footer-item {
-            background-color: #e9ecef;
-            height: 50px;
-            border-radius: 3px;
-        }
+    .header {
+      grid-area: header;
+      height: 110px;
+      background: #a8cf45;
+    }
 
-        /* --- 響應式斷點：當寬度小於 480px (手機版) --- */
-        @media (max-width: 480px) {
-            /* 切換到佈局 (a) */
-            .content-row {
-                /* 中間區塊改為垂直堆疊 */
-                flex-direction: column; 
-            }
+    .main {
+      height: 48px;
+      background: #18b8cc;
+    }
 
-            .content-box {
-                height: 80px; /* 手機版稍微縮短高度以便顯示 */
-            }
+    .main1 { grid-area: main1; }
+    .main2 { grid-area: main2; }
+    .main3 { grid-area: main3; }
 
-            .footer-grid {
-                /* 底部區塊改為 2 欄排列 (2x2) */
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    </style>
+    .footer {
+      height: 34px;
+      background: #d7dde1;
+    }
+
+    .foot1 { grid-area: foot1; }
+    .foot2 { grid-area: foot2; }
+    .foot3 { grid-area: foot3; }
+    .foot4 { grid-area: foot4; }
+
+    @media (min-width: 480px) {
+      .panel {
+        width: min(520px, 100%);
+      }
+
+      .layout {
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-areas:
+          "header header header header header header header header header header header header"
+          "main1 main1 main1 main1 main2 main2 main2 main2 main3 main3 main3 main3"
+          "foot1 foot1 foot1 foot2 foot2 foot2 foot3 foot3 foot3 foot4 foot4 foot4";
+      }
+
+      .header {
+        height: 120px;
+      }
+
+      .main {
+        height: 130px;
+      }
+
+      .footer {
+        height: 78px;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="header"></div>
-
-        <div class="content-row">
-            <div class="content-box"></div>
-            <div class="content-box"></div>
-            <div class="content-box"></div>
-        </div>
-
-        <div class="footer-grid">
-            <div class="footer-item"></div>
-            <div class="footer-item"></div>
-            <div class="footer-item"></div>
-            <div class="footer-item"></div>
-        </div>
+  <div class="outer">
+    <div class="panel">
+      <div class="layout">
+        <div class="box header"></div>
+        <div class="box main main1"></div>
+        <div class="box main main2"></div>
+        <div class="box main main3"></div>
+        <div class="box footer foot1"></div>
+        <div class="box footer foot2"></div>
+        <div class="box footer foot3"></div>
+        <div class="box footer foot4"></div>
+      </div>
     </div>
-
+  </div>
 </body>
 </html>
