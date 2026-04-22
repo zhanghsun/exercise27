@@ -1,109 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Responsive Layout</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Layout Practice</title>
+    <style>
+        /* 背景與基本設定 */
+        body {
+            background-color: #5bb2fb; /* 圖片中的藍色背景 */
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 24px;
-      background: #efefef;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+        /* 白色卡片容器 */
+        .container {
+            background-color: white;
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 12px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
 
-    .outer {
-      width: min(760px, 100%);
-      background: #55acec;
-      padding: 18px;
-    }
+        /* 頂部綠色區塊 */
+        .header {
+            background-color: #b3d944;
+            height: 140px;
+            border-radius: 6px;
+        }
 
-    .panel {
-      width: min(360px, 100%);
-      margin: 0 auto;
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 12px;
-    }
+        /* 中間藍綠色區塊容器 */
+        .content-row {
+            display: flex;
+            gap: 10px;
+            /* 電腦版 (b): 預設為橫向排列 */
+            flex-direction: row; 
+        }
 
-    .layout {
-        grid-template-columns: repeat(3, 1fr) repeat(4, 1fr);
-        grid-template-areas: none;
-      }
+        .content-box {
+            background-color: #00bcd4;
+            height: 120px;
+            flex: 1; /* 平分剩餘空間 */
+            border-radius: 4px;
+        }
 
-      .header {
-        grid-column: 1 / 8;
-        grid-row: 1;
-        height: 120px;
-      }
+        /* 底部灰色小區塊容器 */
+        .footer-grid {
+            display: grid;
+            gap: 10px;
+            /* 電腦版 (b): 預設為 4 欄 */
+            grid-template-columns: repeat(4, 1fr);
+        }
 
-      .main1 {
-        grid-column: 1 / 2;
-        grid-row: 2;
-      }
+        .footer-item {
+            background-color: #e9ecef;
+            height: 50px;
+            border-radius: 3px;
+        }
 
-      .main2 {
-        grid-column: 2 / 3;
-        grid-row: 2;
-      }
+        /* --- 響應式斷點：當寬度小於 480px (手機版) --- */
+        @media (max-width: 480px) {
+            /* 切換到佈局 (a) */
+            .content-row {
+                /* 中間區塊改為垂直堆疊 */
+                flex-direction: column; 
+            }
 
-      .main3 {
-        grid-column: 3 / 4;
-        grid-row: 2;
-      }
+            .content-box {
+                height: 80px; /* 手機版稍微縮短高度以便顯示 */
+            }
 
-      .main {
-        height: 132px;
-      }
-
-      .foot1 {
-        grid-column: 4 / 5;
-        grid-row: 3;
-      }
-
-      .foot2 {
-        grid-column: 5 / 6;
-        grid-row: 3;
-      }
-
-      .foot3 {
-        grid-column: 6 / 7;
-        grid-row: 3;
-      }
-
-      .foot4 {
-        grid-column: 7 / 8;
-        grid-row: 3;
-      }
-
-      .footer {
-        height: 76px;
-      }
-    }
-  </style>
+            .footer-grid {
+                /* 底部區塊改為 2 欄排列 (2x2) */
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="outer">
-    <div class="panel">
-      <div class="layout">
-        <div class="box header"></div>
-        <div class="box main main1"></div>
-        <div class="box main main2"></div>
-        <div class="box main main3"></div>
-        <div class="box footer foot1"></div>
-        <div class="box footer foot2"></div>
-        <div class="box footer foot3"></div>
-        <div class="box footer foot4"></div>
-      </div>
+
+    <div class="container">
+        <div class="header"></div>
+
+        <div class="content-row">
+            <div class="content-box"></div>
+            <div class="content-box"></div>
+            <div class="content-box"></div>
+        </div>
+
+        <div class="footer-grid">
+            <div class="footer-item"></div>
+            <div class="footer-item"></div>
+            <div class="footer-item"></div>
+            <div class="footer-item"></div>
+        </div>
     </div>
-  </div>
+
 </body>
 </html>
